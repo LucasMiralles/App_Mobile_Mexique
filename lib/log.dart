@@ -1,5 +1,7 @@
+import 'package:app_mobile_mexique/utils/singleton.dart';
 import 'package:flutter/material.dart';
 import 'package:app_mobile_mexique/constantes.dart' as cons;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'home.dart';
 
@@ -16,7 +18,34 @@ class _LogState extends State<Log> {
   String? _contrasena;
   bool bandera = false;
   final user = TextEditingController();
-  final pass = TextEditingController();
+  final password = TextEditingController();
+
+  late Singleton singleton;
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    singleton = Singleton();
+    initPreferences();
+    super.initState();
+  }
+
+  Future<void> initPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    checkIsLogin();
+  }
+
+  void checkIsLogin() {
+    bool band = prefs.getBool('isLogin') ?? false;
+
+    if (band) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const Home(),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,8 +121,7 @@ class _LogState extends State<Log> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+                      padding: EdgeInsets.symmetric(horizontal: 35, vertical: 15),
                       child: Text(
                         'Bienvenido a Burger Classic',
                         style: TextStyle(
@@ -122,7 +150,7 @@ class _LogState extends State<Log> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: TextFormField(
-                        controller: pass,
+                        controller: password,
                         decoration: const InputDecoration(
                           labelText: 'Contraseña',
                           floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -138,17 +166,23 @@ class _LogState extends State<Log> {
                       onPressed: () {
                         setState(() {
                           if (_formKey.currentState!.validate()) {
-                            if (user.text == 'lucas' && pass.text == 'lucas') {
+                            if (user.text == 'lucas' && password.text == 'lucas') {
+                              singleton.user = user.text;
+                              singleton.password = password.text;
+                              prefs.setString('user', user.text);
+                              prefs.setString('pass', password.text);
+                              prefs.setBool('isLogin', true);
                               // Si les identifiants et les mots de passe correspondent, naviguer vers une autre page
-                              Navigator.of(context).push(
+                              Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      const Home(), // Page de destination
+                                  builder: (context) => const Home(), // Page de destination
                                 ),
                               );
                             } else {
                               // Si les identifiants et les mots de passe ne correspondent pas, définir une variable "bandera" sur true
-                              bandera = true;
+                              setState(() {
+                                bandera = true;
+                              });
                             }
                           }
                         });
@@ -172,10 +206,10 @@ class _LogState extends State<Log> {
                     const SizedBox(height: 30),
                     bandera
                         ? const Text(
-                            'Usuario o contraseña incorrectos',
-                            style: TextStyle(color: Colors.red),
-                            textAlign: TextAlign.center,
-                          )
+                      'Usuario o contraseña incorrectos',
+                      style: TextStyle(color: Colors.red),
+                      textAlign: TextAlign.center,
+                    )
                         : const SizedBox(),
                     TextButton(
                       onPressed: () {},

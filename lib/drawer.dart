@@ -1,7 +1,11 @@
+import 'package:app_mobile_mexique/utils/singleton.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({Key? key}) : super(key: key);
+  final Singleton singleton;
+  const CustomDrawer({Key? key, required this.singleton}) : super(key: key);
+
+  
 
   @override
   Widget build(BuildContext context) {

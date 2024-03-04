@@ -1,5 +1,6 @@
 import 'package:app_mobile_mexique/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'home.dart';
 import 'log.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      home: const Home(),
     );
   }
 }
