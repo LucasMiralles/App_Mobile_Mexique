@@ -1,6 +1,8 @@
 import 'package:app_mobile_mexique/utils/singleton.dart';
+import 'package:app_mobile_mexique/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:app_mobile_mexique/constantes.dart' as cons;
+import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'home.dart';
@@ -27,8 +29,16 @@ class _LogState extends State<Log> {
   void initState() {
     singleton = Singleton();
     initPreferences();
+    checkPosition();
     super.initState();
   }
+
+  void checkPosition() async {
+    Position position = await Utils.determinePosition();
+    singleton.latitud = position.latitude;
+    singleton.longitud = position.longitude;
+  }
+
 
   Future<void> initPreferences() async {
     prefs = await SharedPreferences.getInstance();

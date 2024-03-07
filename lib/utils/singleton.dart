@@ -6,6 +6,9 @@ class Singleton {
   }
   factory Singleton() => _instance ?? Singleton._internal();
 
+  double latitud = 0.0;
+  double longitud = 0.0;
+
   String user = '';
   String password = '';
 
