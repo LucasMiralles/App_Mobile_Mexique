@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:app_mobile_mexique/constantes.dart' as cons;
-import 'home.dart';
+        import 'package:app_mobile_mexique/constantes.dart' as cons;
+        import 'home.dart';
 
-class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+        class Register extends StatefulWidget {
+        const Register({Key? key}) : super(key: key);
 
-  @override
-  _RegisterState createState() => _RegisterState();
-}
+        @override
+        _RegisterState createState() => _RegisterState();
+        }
 
-class _RegisterState extends State<Register> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+        class _RegisterState extends State<Register> {
+        final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String? _nombreCompleto;
-  String? _correo;
-  String? _direccion;
-  String? _contrasena;
-  bool bandera = false;
-  final user = TextEditingController();
-  final pass = TextEditingController();
+        String? _nombreCompleto;
+        String? _correo;
+        String? _direccion;
+        String? _contrasena;
+        bool bandera = false;
+        final user = TextEditingController();
+        final pass = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Stack(
+        @override
+        Widget build(BuildContext context) {
+        final size = MediaQuery.of(context).size;
+        return Scaffold(
+        body: Stack(
         children: [
           // Arrière-plan avec la couleur cons.fondo
           Container(
@@ -203,7 +203,7 @@ class _RegisterState extends State<Register> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: cons.naranja,
+                          backgroundColor: cons.naranja,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),

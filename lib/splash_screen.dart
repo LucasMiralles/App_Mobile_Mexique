@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: cons.naranja,
+                  backgroundColor: cons.naranja,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),

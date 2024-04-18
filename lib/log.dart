@@ -198,7 +198,7 @@ class _LogState extends State<Log> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: cons.naranja,
+                        backgroundColor: cons.naranja,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
